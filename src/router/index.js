@@ -159,6 +159,77 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: 'external-baidu',
+    component: Layout,
+    children: [
+      {
+        path: 'https://www.baidu.com',
+        meta: { title: '百度', icon: 'link' }
+      }
+    ]
+  },
+  {
+    path: '/User',
+    component: Layout,
+    name: 'User',
+    children: [{
+      path: 'index',
+      name: 'user',
+      component: () => import('@/views/user/index'),
+      meta: { title: '用户管理', icon: 'el-icon-user' }
+    }]
+  },
+  {
+    path: '/Role',
+    component: Layout,
+    name: 'Role',
+    children: [{
+      path: 'index',
+      name: 'user',
+      component: () => import('@/views/role/index'),
+      meta: { title: '角色管理', icon: 'el-icon-user-solid' }
+    }]
+  },
+  {
+    path: '/permissionmanagement',
+    component: Layout,
+    redirect: '/permissionmanagement/interface',
+    name: 'permissionmanagement',
+    meta: { title: '菜单权限管理', icon: 'el-icon-user-solid' },
+    children: [
+      {
+        path: 'interface',
+        name: 'interface',
+        component: () => import('@/views/permissionmanagement/interface'),
+        meta: { title: '接口管理', icon: 'table' }
+      },
+      {
+        path: 'menu',
+        name: 'menu',
+        component: () => import('@/views/permissionmanagement/menu'),
+        meta: { title: '菜单管理', icon: 'tree' }
+      }
+      ,
+      {
+        path: 'rolepermission',
+        name: 'rolepermission',
+        component: () => import('@/views/permissionmanagement/rolepermission'),
+        meta: { title: '角色权限分配', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/logmanage',
+    component: Layout,
+    name: 'logmanage',
+    children: [{
+      path: 'index',
+      name: 'logmanage',
+      component: () => import('@/views/logmanage/index'),
+      meta: { title: '日志管理', icon: 'el-icon-user-solid' }
+    }]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

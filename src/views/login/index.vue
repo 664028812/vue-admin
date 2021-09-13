@@ -68,7 +68,8 @@
 <script>
 import { validUsername } from "@/utils/validate";
 import { Get, Post } from "@/api/requestmethod";
-import { getToken, setToken } from "@/utils/auth"; // get token from cookie
+import { getToken, setToken, setUserId, setUser } from "@/utils/auth"; // get token from cookie
+import ResizeHandler from "@/layout/mixin/ResizeHandler";
 export default {
   name: "Login",
   data() {
@@ -141,6 +142,14 @@ export default {
               console.log(`账号登录成功${res.response.token}`);
               //
               setToken(res.response.token);
+              setUserId(res.response.id);
+              //这里请求 用户id 的具体数据
+              Get("getUserById", { id: res.response.id }).then(res1 => {
+                if (res1.success) {
+                  var data = JSON.stringify(res1.response);
+                  setUser(data);
+                }
+              });
               this.$router.push({ path: "/" });
             } else {
               console.log(`账号登录失败${res}`);
